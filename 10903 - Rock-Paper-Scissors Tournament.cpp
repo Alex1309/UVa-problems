@@ -12,14 +12,17 @@ using namespace std;
 
 int main() {
 	int n,k;
+	 bool t = true;
+
 	while(cin>>n)
 		if(n==0)
 			break;
 		else{
 			cin>>k;
-			int t=0;
-			t++;
-
+			if (!t)
+				cout<<endl;
+			else
+				t = false;
 			float players[n];
 			float same[n];
 			for(int i=0;i<n;i++){
@@ -58,14 +61,9 @@ int main() {
 			}
 			for(int i=0;i<n;i++){
 				float d=(float)(players[i]+same[i]);
-				if((players[i])/(d)==0){
-					cout<<"-"<<endl;
-				}else{
 					cout << setprecision (3) << fixed << (players[i])/(d)<<endl;
-				}
+
 			}
-			if(t>=1)
-				cout<<endl;
 
 		}
 }
