@@ -16,10 +16,13 @@ int main() {
 	int i=0;
 	int posix=0,posiy=0;
 	int no=0;
-
+	int number=1;
+	bool t=true;
 	while(getline(cin,puzzle)){
+
 		if(puzzle=="Z")
 			break;
+
 		if(i<=4){
 			for(int j=0;j<5;j++){
 				if(puzzle.at(j)==' '){
@@ -56,21 +59,27 @@ int main() {
 			}
 		}
 		if(i==0){
+			if (!t)
+				cout<<endl;
+			else
+				t = false;
+			cout<<"Puzzle #"<<number<<":"<<endl;
+			number++;
 			if(no==1){
 				cout <<"This puzzle has no final configuration."<<endl;
+				no=0;
 			}else{
 				for(int i=0;i<5;i++){
 					for(int j=0;j<5;j++){
-						cout <<puzzlem[i][j]<<" ";
+						if(j==4)
+							cout <<puzzlem[i][j];
+						else
+							cout <<puzzlem[i][j]<<" ";
 					}
 					cout <<endl;
 				}
+
 			}
-			cout<<endl;
-
 		}
-
 	}
-
-
 }
