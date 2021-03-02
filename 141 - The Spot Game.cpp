@@ -14,89 +14,91 @@ using namespace std;
 
 int main() {
 	int n;
-	cin >>n;
-	int table[n][n];
-	for(int i = 0; i < n; i++){
-		for(int j = 0; j < n; j++){
-			table[i][j]=0;
-		}
-	}
-
-	map<string,int> ifrepeated;
-
-
-	int endWhile=2*n;
-	int move =1;
-	int moveWinner=0;
-	int end=0;
-	while(endWhile!=0){
-
-		int x,y;
-		string s;
-		cin>>x>>y>>s;
-		if(s == "+"){
-			table[x-1][y-1]= 1;
-		}else{
-			table[x-1][y-1]= 0;
-		}
-
-		string v;
-		for(int i = 0; i < n; i++){
-			for(int j = 0; j < n; j++){
-				v += (table[i][j]+'0');
-			}
-		}
-		if (ifrepeated[v]==1 and end==0){
-			end=1;
-			moveWinner=move;
-
-		}
-
-		int auxTable[n][n];
-		int auxTemp[n][n];
-		for(int i = 0; i < n; i++){
-			for(int j = 0; j < n; j++){
-				auxTemp[i][j]=table[i][j];
-			}
-		}
-		for(int z=0;z<4;z++){
-			int iAux=0;
-			int jAux=n-1;
-			for(int i=0;i<n;i++){
-				for(int j=0;j<n;j++){
-					auxTable[iAux][jAux]=auxTemp[i][j];
-					iAux++;
-				}
-				jAux--;
-				iAux=0;
-			}
+	while(cin >>n)
+		if(n==0)
+			break;
+		else{
+			int table[n][n];
 			for(int i = 0; i < n; i++){
 				for(int j = 0; j < n; j++){
-					auxTemp[i][j]=auxTable[i][j];
+					table[i][j]=0;
 				}
 			}
 
-			string auxV="";
-			for(int i = 0; i < n; i++){
-				for(int j = 0; j < n; j++){
-					auxV += (auxTable[i][j]+'0');
-				}
-			}
+			map<string,int> ifrepeated;
+			int endWhile=2*n;
+			int move =1;
+			int moveWinner=0;
+			int end=0;
+			while(endWhile!=0){
 
-			ifrepeated[auxV]=1;
+				int x,y;
+				string s;
+				cin>>x>>y>>s;
+				if(s == "+"){
+					table[x-1][y-1]= 1;
+				}else{
+					table[x-1][y-1]= 0;
+				}
+
+				string v;
+				for(int i = 0; i < n; i++){
+					for(int j = 0; j < n; j++){
+						v += (table[i][j]+'0');
+					}
+				}
+				if (ifrepeated[v]==1 and end==0){
+					end=1;
+					moveWinner=move;
+
+				}
+
+				int auxTable[n][n];
+				int auxTemp[n][n];
+				for(int i = 0; i < n; i++){
+					for(int j = 0; j < n; j++){
+						auxTemp[i][j]=table[i][j];
+					}
+				}
+				for(int z=0;z<4;z++){
+					int iAux=0;
+					int jAux=n-1;
+					for(int i=0;i<n;i++){
+						for(int j=0;j<n;j++){
+							auxTable[iAux][jAux]=auxTemp[i][j];
+							iAux++;
+						}
+						jAux--;
+						iAux=0;
+					}
+					for(int i = 0; i < n; i++){
+						for(int j = 0; j < n; j++){
+							auxTemp[i][j]=auxTable[i][j];
+						}
+					}
+
+					string auxV="";
+					for(int i = 0; i < n; i++){
+						for(int j = 0; j < n; j++){
+							auxV += (auxTable[i][j]+'0');
+						}
+					}
+					ifrepeated[auxV]=1;
+				}
+
+				endWhile--;
+				move++;
+			}
+			if(end==1){
+				if(moveWinner%2==0){
+					cout <<"Player 1 wins on move "<< moveWinner <<endl;
+				}else{
+					cout <<"Player 2 wins on move "<< moveWinner <<endl;
+				}
+			}else{
+				cout <<"Draw"<<endl;
+			}
 
 		}
-
-		endWhile--;
-		move++;
-	}
-
-	if(end==1){
-		cout<<moveWinner;
-		cout<<"lost";
-
-	}else{
-		cout <<"draw";
-	}
 
 }
